@@ -1,24 +1,21 @@
 const argv = require('minimist')(process.argv.slice(2))
+const japanStandardTime = new Date().toLocaleString({ timeZone: 'Asia/Tokyo' })
 
 function findYear () {
-  if ((!argv.y) && (process.argv[3] !== undefined)) {
-    return process.argv[3]
-  } else if (argv.y) {
+  if (argv.y) {
     return argv.y
   } else {
-    const day = new Date()
-    return day.getFullYear()
+    return new Date(japanStandardTime).getFullYear()
   }
 }
 
 function findMonth () {
-  if ((!argv.m) && (process.argv[2] !== undefined)) {
-    return process.argv[2]
-  } else if (argv.m) {
+  if (argv.m) {
     return argv.m
+  } else if (process.argv[2] !== undefined) {
+    return process.argv[2]
   } else {
-    const day = new Date()
-    return day.getMonth() + 1
+    return new Date(japanStandardTime).getMonth() + 1
   }
 }
 
@@ -26,9 +23,9 @@ function displayCalendar () {
   const month = findMonth()
   const year = findYear()
 
-  const lastDay = new Date(year, month, 0)
+  const lastDay = new Date(year, month, 0, 9)
   const lastDate = lastDay.getDate()
-  const firstDay = new Date(year, month - 1, 1)
+  const firstDay = new Date(year, month - 1, 1, 9)
   const firstWday = firstDay.getDay()
 
   console.log('      ' + month + '月  ' + year)
