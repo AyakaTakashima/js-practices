@@ -4,6 +4,8 @@ const japanStandardTime = new Date().toLocaleString({ timeZone: 'Asia/Tokyo' })
 function findYear () {
   if (argv.y) {
     return argv.y
+  } else if ((!argv.m) && (process.argv[3])) {
+    return process.argv[3]
   } else {
     return new Date(japanStandardTime).getFullYear()
   }
