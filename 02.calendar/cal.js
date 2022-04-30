@@ -43,10 +43,8 @@ function displayCalendar () {
       console.log(' ' + i.toString())
     } else if (date.getDay() === 6) {
       console.log(i.toString() + ' ')
-    } else if (i < 10) {
-      process.stdout.write(' ' + i.toString() + ' ')
     } else {
-      process.stdout.write(i.toString() + ' ')
+      process.stdout.write(i.toString().padStart(2, ' ') + ' ')
     }
   }
   console.log(' ')

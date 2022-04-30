@@ -3,6 +3,9 @@
     "eslint": "^8.13.0"
   },
   "dependencies": {
-    "minimist": "^1.2.6"
-  }
+    "minimist": "^1.2.6",
+    "standard": "^17.0.0"
+  },
+    "license": "UNLICENSED",
+    "private": true
 }
