@@ -39,10 +39,8 @@ function displayCalendar () {
 
   for (let i = 1; i <= lastDate; i++) {
     const date = new Date(year, month - 1, i)
-    if ((date.getDay() === 6) && (i < 10)) {
-      console.log(' ' + i.toString())
-    } else if (date.getDay() === 6) {
-      console.log(i.toString() + ' ')
+    if (date.getDay() === 6) {
+      console.log(i.toString().padStart(2, ' ') + ' ')
     } else {
       process.stdout.write(i.toString().padStart(2, ' ') + ' ')
     }
