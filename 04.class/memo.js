@@ -60,14 +60,6 @@ class Memo {
 
     reader.on('line', function (line) {
       lines.push(line + '\n')
-      const title = lines[0].split('\n')[0]
-      const content = lines.slice(1).join('')
-      fs.writeFile(`memo_data/${title}.txt`, content.toString(), (err) => {
-        if (err) {
-          console.log('エラーが発生しました。' + err)
-          throw err
-        }
-      })
     })
 
     reader.on('close', function () {
@@ -77,6 +69,14 @@ class Memo {
         console.log('そのタイトルのメモはすでにあります。\nメモの保存ができませんでした')
       } else {
         console.log('下記をメモとして保存しました。')
+        const title = lines[0].split('\n')[0]
+        const content = lines.slice(1).join('')
+        fs.writeFile(`memo_data/${title}.txt`, content.toString(), (err) => {
+          if (err) {
+            console.log('エラーが発生しました。' + err)
+            throw err
+          }
+        })
         for (let i = 0; i < lines.length; i++) {
           console.log(lines[i].split('\n')[0])
         }
