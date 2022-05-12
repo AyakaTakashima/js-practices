@@ -2,6 +2,11 @@ const argv = require('minimist')(process.argv.slice(2))
 const fs = require('fs')
 const { Select } = require('enquirer')
 
+let path = 'memo_data/'
+if (!fs.existsSync(path)) {
+  fs.mkdirSync(path)
+}
+
 const filenames = fs.readdirSync('memo_data')
 const memoTitles = []
 for (let i = 0; i < filenames.length; i++) {
