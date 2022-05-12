@@ -2,7 +2,7 @@ const argv = require('minimist')(process.argv.slice(2))
 const fs = require('fs')
 const { Select } = require('enquirer')
 
-let path = 'memo_data/'
+const path = 'memo_data/'
 if (!fs.existsSync(path)) {
   fs.mkdirSync(path)
 }
