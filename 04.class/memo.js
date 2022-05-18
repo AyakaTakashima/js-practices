@@ -1,6 +1,7 @@
 const argv = require('minimist')(process.argv.slice(2))
 const fs = require('fs')
 const { Select } = require('enquirer')
+const readline = require('readline')
 
 const path = 'memo_data/'
 if (!fs.existsSync(path)) {
@@ -14,11 +15,6 @@ for (let i = 0; i < filenames.length; i++) {
 }
 
 class Memo {
-  constructor (filenames, memoTitles) {
-    this.filenames = filenames
-    this.memoTitles = memoTitles
-  }
-
   static list () {
     for (let i = 0; i < filenames.length; i++) {
       console.log(filenames[i].split('.txt')[0])
@@ -32,7 +28,7 @@ class Memo {
     })
 
     prompt.run()
-      .then(answer => console.log(fs.readFileSync('memo_data/' + answer + '.txt', 'utf-8')))
+      .then(answer => console.log(fs.readFileSync(`memo_data/${answer}.txt`, 'utf-8')))
       .catch(console.error)
   }
 
@@ -44,7 +40,7 @@ class Memo {
 
     prompt.run()
       .then(function (answer = []) {
-        unlink('memo_data/' + answer + '.txt')
+        unlink(`memo_data/${answer}.txt`)
         console.log(answer + 'を削除しました。')
       })
       .catch(console.error)
@@ -52,7 +48,7 @@ class Memo {
 
   static create () {
     const lines = []
-    const reader = require('readline').createInterface({
+    const reader = readline.createInterface({
       input: process.stdin,
       output: process.stdout
     })
