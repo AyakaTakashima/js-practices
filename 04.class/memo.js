@@ -9,11 +9,11 @@ if (!fs.existsSync(path)) {
 }
 
 class MemoDb {
-  static fileNames() {
+  static fileNames () {
     return fs.readdirSync('memo_data')
   }
 
-  static findAll(){
+  static findAll () {
     const filenames = MemoDb.fileNames()
     const memoTitles = []
     for (let i = 0; i < filenames.length; i++) {
@@ -23,7 +23,7 @@ class MemoDb {
   }
 }
 
-class Memo {  
+class Memo {
   static list () {
     const memoTitles = MemoDb.findAll()
     for (let i = 0; i < memoTitles.length; i++) {
