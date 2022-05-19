@@ -21,24 +21,24 @@ class Memo {
     }
   }
 
-  static show () {
+  static async show () {
     const prompt = new Select({
       message: '閲覧したいメモを選んでください。',
       choices: memoTitles
     })
 
-    prompt.run()
+    await prompt.run()
       .then(answer => console.log(fs.readFileSync(`memo_data/${answer}.txt`, 'utf-8')))
       .catch(console.error)
   }
 
-  static delete () {
+  static async delete () {
     const prompt = new Select({
       message: '削除したいメモを選んでください。',
       choices: memoTitles
     })
 
-    prompt.run()
+    await prompt.run()
       .then(function (answer = []) {
         unlink(`memo_data/${answer}.txt`)
         console.log(answer + 'を削除しました。')
