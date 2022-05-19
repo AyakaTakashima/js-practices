@@ -8,20 +8,31 @@ if (!fs.existsSync(path)) {
   fs.mkdirSync(path)
 }
 
-const filenames = fs.readdirSync('memo_data')
-const memoTitles = []
-for (let i = 0; i < filenames.length; i++) {
-  memoTitles.push(filenames[i].split('.txt')[0])
+class MemoDb {
+  static fileNames() {
+    return fs.readdirSync('memo_data')
+  }
+
+  static findAll(){
+    const filenames = MemoDb.fileNames()
+    const memoTitles = []
+    for (let i = 0; i < filenames.length; i++) {
+      memoTitles.push(filenames[i].split('.txt')[0])
+    }
+    return memoTitles
+  }
 }
 
-class Memo {
+class Memo {  
   static list () {
-    for (let i = 0; i < filenames.length; i++) {
-      console.log(filenames[i].split('.txt')[0])
+    const memoTitles = MemoDb.findAll()
+    for (let i = 0; i < memoTitles.length; i++) {
+      console.log(memoTitles[i])
     }
   }
 
   static async show () {
+    const memoTitles = MemoDb.findAll()
     const prompt = new Select({
       message: '閲覧したいメモを選んでください。',
       choices: memoTitles
@@ -33,6 +44,7 @@ class Memo {
   }
 
   static async delete () {
+    const memoTitles = MemoDb.findAll()
     const prompt = new Select({
       message: '削除したいメモを選んでください。',
       choices: memoTitles
@@ -58,6 +70,7 @@ class Memo {
       lines.push(line + '\n')
     })
 
+    const memoTitles = MemoDb.findAll()
     reader.on('close', function () {
       if (!lines.length) {
         console.log('終了しました。')
