@@ -38,9 +38,8 @@ class Memo {
       choices: memoTitles
     })
 
-    await prompt.run()
-      .then(answer => console.log(fs.readFileSync(`memo_data/${answer}.txt`, 'utf-8')))
-      .catch(console.error)
+    const answer = await prompt.run()
+    console.log(fs.readFileSync(`memo_data/${answer}.txt`, 'utf-8'))
   }
 
   static async delete () {
