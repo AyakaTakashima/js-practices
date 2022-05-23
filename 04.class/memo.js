@@ -49,12 +49,9 @@ class Memo {
       choices: memoTitles
     })
 
-    await prompt.run()
-      .then(function (answer = []) {
-        unlink(`memo_data/${answer}.txt`)
-        console.log(answer + 'を削除しました。')
-      })
-      .catch(console.error)
+    const answer = await prompt.run()
+    unlink(`memo_data/${answer}.txt`)
+    console.log(answer + 'を削除しました。')
   }
 
   static create () {
